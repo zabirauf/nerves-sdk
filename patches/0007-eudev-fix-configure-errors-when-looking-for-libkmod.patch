@@ -1,0 +1,35 @@
+From 770693350318cc7dfa0808a1ceae3e8ff2fe2b2a Mon Sep 17 00:00:00 2001
+From: Frank Hunleth <fhunleth@lkc.com>
+Date: Fri, 28 Mar 2014 14:45:19 -0400
+Subject: [PATCH 07/10] eudev: fix configure errors when looking for libkmod
+
+Without this patch configure looks at the host machine for libkmod instead
+of the staging directory.
+
+Signed-off-by: Frank Hunleth <fhunleth@lkc.com>
+---
+ package/eudev/eudev.mk | 8 +++++++-
+ 1 file changed, 7 insertions(+), 1 deletion(-)
+
+diff --git a/package/eudev/eudev.mk b/package/eudev/eudev.mk
+index a2fe528..7c258f5 100644
+--- a/package/eudev/eudev.mk
++++ b/package/eudev/eudev.mk
+@@ -12,7 +12,13 @@ EUDEV_INSTALL_STAGING = YES
+ EUDEV_AUTORECONF = YES
+ 
+ # mq_getattr is in librt
+-EUDEV_CONF_ENV += LIBS=-lrt
++EUDEV_CONF_ENV += LIBS=-lrt 
++
++# help configure pass the kmod checks
++EUDEV_CONF_ENV += ac_cv_lib_kmod_main=yes \
++		PKG_CONFIG_SYSROOT_DIR="$(STAGING_DIR)" \
++                PKG_CONFIG="$(PKG_CONFIG_HOST_BINARY)" \
++                PKG_CONFIG_PATH="$(STAGING_DIR)/usr/lib/pkgconfig:$(PKG_CONFIG_PATH)"
+ 
+ EUDEV_CONF_OPT =		\
+ 	--disable-manpages	\
+-- 
+1.8.3.2
+

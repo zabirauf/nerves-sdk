@@ -1,0 +1,28 @@
+From 6d326ddab802aa04f07b0561b8fb01c9cfd8a0ef Mon Sep 17 00:00:00 2001
+From: Frank Hunleth <fhunleth@lkc.com>
+Date: Fri, 28 Mar 2014 18:02:38 -0400
+Subject: [PATCH 08/10] xserver-xorg-server: add pkg-config paths
+
+---
+ package/x11r7/xserver_xorg-server/xserver_xorg-server.mk | 5 +++++
+ 1 file changed, 5 insertions(+)
+
+diff --git a/package/x11r7/xserver_xorg-server/xserver_xorg-server.mk b/package/x11r7/xserver_xorg-server/xserver_xorg-server.mk
+index 7bbb6b1..45bd16c 100644
+--- a/package/x11r7/xserver_xorg-server/xserver_xorg-server.mk
++++ b/package/x11r7/xserver_xorg-server/xserver_xorg-server.mk
+@@ -55,6 +55,11 @@ XSERVER_XORG_SERVER_DEPENDENCIES = 	\
+ 	mcookie 			\
+ 	host-pkgconf
+ 
++XSERVER_XORG_SERVER_CONF_ENV += \
++                PKG_CONFIG_SYSROOT_DIR="$(STAGING_DIR)" \
++                PKG_CONFIG="$(PKG_CONFIG_HOST_BINARY)" \
++                PKG_CONFIG_PATH="$(STAGING_DIR)/usr/lib/pkgconfig"
++
+ XSERVER_XORG_SERVER_CONF_OPT = --disable-config-hal \
+ 		--disable-xnest --disable-xephyr --disable-dmx \
+ 		--with-builder-addr=buildroot@buildroot.org \
+-- 
+1.8.3.2
+

@@ -1,0 +1,26 @@
+From 19e6be37c16d2f31758aea88e516483bd7af8b64 Mon Sep 17 00:00:00 2001
+From: Frank Hunleth <fhunleth@troodon-software.com>
+Date: Fri, 28 Mar 2014 22:08:53 -0400
+Subject: [PATCH 09/10] xdriver_xf86-video-vesa: bump version to 2.3.3
+
+This fixes a compiler error due to not being able to include mibstore.h.
+---
+ package/x11r7/xdriver_xf86-video-vesa/xdriver_xf86-video-vesa.mk | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/package/x11r7/xdriver_xf86-video-vesa/xdriver_xf86-video-vesa.mk b/package/x11r7/xdriver_xf86-video-vesa/xdriver_xf86-video-vesa.mk
+index 3c69276..05d15dd 100644
+--- a/package/x11r7/xdriver_xf86-video-vesa/xdriver_xf86-video-vesa.mk
++++ b/package/x11r7/xdriver_xf86-video-vesa/xdriver_xf86-video-vesa.mk
+@@ -4,7 +4,7 @@
+ #
+ ################################################################################
+ 
+-XDRIVER_XF86_VIDEO_VESA_VERSION = 2.3.1
++XDRIVER_XF86_VIDEO_VESA_VERSION = 2.3.3
+ XDRIVER_XF86_VIDEO_VESA_SOURCE = xf86-video-vesa-$(XDRIVER_XF86_VIDEO_VESA_VERSION).tar.bz2
+ XDRIVER_XF86_VIDEO_VESA_SITE = http://xorg.freedesktop.org/releases/individual/driver
+ XDRIVER_XF86_VIDEO_VESA_LICENSE = MIT
+-- 
+1.8.3.2
+

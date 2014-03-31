@@ -1,0 +1,29 @@
+From 1b36e10dcb433346a515f8c3b606e52f2d62df50 Mon Sep 17 00:00:00 2001
+From: Frank Hunleth <fhunleth@troodon-software.com>
+Date: Mon, 31 Mar 2014 13:55:38 -0400
+Subject: [PATCH 10/10] xdriver_xf86-video-fbdev: bump version to 0.4.4
+
+This fixes a compiler error due to not being able to include
+mibstore.h.
+
+Signed-off-by: Frank Hunleth <fhunleth@troodon-software.com>
+---
+ package/x11r7/xdriver_xf86-video-fbdev/xdriver_xf86-video-fbdev.mk | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/package/x11r7/xdriver_xf86-video-fbdev/xdriver_xf86-video-fbdev.mk b/package/x11r7/xdriver_xf86-video-fbdev/xdriver_xf86-video-fbdev.mk
+index 12eb315..7d08c7d 100644
+--- a/package/x11r7/xdriver_xf86-video-fbdev/xdriver_xf86-video-fbdev.mk
++++ b/package/x11r7/xdriver_xf86-video-fbdev/xdriver_xf86-video-fbdev.mk
+@@ -4,7 +4,7 @@
+ #
+ ################################################################################
+ 
+-XDRIVER_XF86_VIDEO_FBDEV_VERSION = 0.4.2
++XDRIVER_XF86_VIDEO_FBDEV_VERSION = 0.4.4
+ XDRIVER_XF86_VIDEO_FBDEV_SOURCE = xf86-video-fbdev-$(XDRIVER_XF86_VIDEO_FBDEV_VERSION).tar.bz2
+ XDRIVER_XF86_VIDEO_FBDEV_SITE = http://xorg.freedesktop.org/releases/individual/driver
+ XDRIVER_XF86_VIDEO_FBDEV_LICENSE = MIT
+-- 
+1.8.3.2
+
