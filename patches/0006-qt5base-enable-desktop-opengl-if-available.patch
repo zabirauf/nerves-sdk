@@ -1,0 +1,94 @@
+From b809dcd95519c2f84547a1ea78342bc026993320 Mon Sep 17 00:00:00 2001
+From: Frank Hunleth <fhunleth@troodon-software.com>
+Date: Tue, 22 Apr 2014 16:14:39 -0400
+Subject: [PATCH 6/6] qt5base: enable desktop opengl if available
+
+This adds support for OpenGL in Qt for configurations that include
+OpenGL, but not EGL.
+
+Signed-off-by: Frank Hunleth <fhunleth@troodon-software.com>
+---
+ package/qt5/qt5base/Config.in  | 10 ++++++++++
+ package/qt5/qt5base/qt5base.mk | 23 +++++++++++++++++++----
+ 2 files changed, 29 insertions(+), 4 deletions(-)
+
+diff --git a/package/qt5/qt5base/Config.in b/package/qt5/qt5base/Config.in
+index 5d5b7f6..d861044 100644
+--- a/package/qt5/qt5base/Config.in
++++ b/package/qt5/qt5base/Config.in
+@@ -115,6 +115,15 @@ config BR2_PACKAGE_QT5BASE_WIDGETS
+ 	help
+ 	  This option enables the Qt5Widgets library.
+ 
++config BR2_PACKAGE_QT5BASE_OPENGL
++	bool "opengl support"
++	depends on BR2_PACKAGE_HAS_LIBGL || BR2_PACKAGE_HAS_LIBGLES
++	help
++	  This option enables the Qt5OpenGL library.
++
++comment "opengl support available if OpenGL or OpenGLES are enabled"
++	depends on !BR2_PACKAGE_HAS_LIBGL && !BR2_PACKAGE_HAS_LIBGLES
++
+ config BR2_PACKAGE_QT5BASE_LINUXFB
+ 	bool "linuxfb support"
+ 
+@@ -139,6 +148,7 @@ config BR2_PACKAGE_QT5BASE_EGLFS
+ 	bool "eglfs support"
+ 	depends on BR2_PACKAGE_HAS_LIBEGL
+ 	depends on BR2_PACKAGE_HAS_LIBGLES
++	select BR2_PACKAGE_QT5BASE_OPENGL
+ 
+ comment "eglfs backend available if OpenGLES and EGL are enabled"
+ 	depends on !BR2_PACKAGE_HAS_LIBEGL || !BR2_PACKAGE_HAS_LIBGLES
+diff --git a/package/qt5/qt5base/qt5base.mk b/package/qt5/qt5base/qt5base.mk
+index 618251e..b7f6e4d 100644
+--- a/package/qt5/qt5base/qt5base.mk
++++ b/package/qt5/qt5base/qt5base.mk
+@@ -96,9 +96,24 @@ else
+ QT5BASE_CONFIGURE_OPTS += -no-xcb
+ endif
+ 
++ifeq ($(BR2_PACKAGE_QT5BASE_OPENGL),y)
+ ifeq ($(BR2_PACKAGE_QT5BASE_EGLFS),y)
+-QT5BASE_CONFIGURE_OPTS += -opengl es2 -eglfs
+-QT5BASE_DEPENDENCIES   += libgles libegl
++QT5BASE_CONFIGURE_OPTS += -opengl es2
++QT5BASE_DEPENDENCIES   += libgles
++else
++QT5BASE_CONFIGURE_OPTS += -opengl desktop
++QT5BASE_DEPENDENCIES   += libgl
++ifeq ($(BR2_PACKAGE_QT5BASE_XCB),y)
++QT5BASE_CONFIGURE_OPTS += -xrender
++endif
++endif
++else
++QT5BASE_CONFIGURE_OPTS += -no-opengl
++endif
++
++ifeq ($(BR2_PACKAGE_QT5BASE_EGLFS),y)
++QT5BASE_CONFIGURE_OPTS += -eglfs
++QT5BASE_DEPENDENCIES   += libegl
+ ifeq ($(BR2_PACKAGE_GPU_VIV_BIN_MX6Q),y)
+ QT5BASE_EGLFS_PLATFORM_HOOKS_SOURCES = \
+ 	$(@D)/mkspecs/devices/linux-imx6-g++/qeglfshooks_imx6.cpp
+@@ -108,7 +123,7 @@ QT5BASE_EGLFS_PLATFORM_HOOKS_SOURCES = \
+ 	$(@D)/mkspecs/devices/linux-rasp-pi-g++/qeglfshooks_pi.cpp
+ endif
+ else
+-QT5BASE_CONFIGURE_OPTS += -no-opengl -no-eglfs
++QT5BASE_CONFIGURE_OPTS += -no-eglfs
+ endif
+ 
+ QT5BASE_CONFIGURE_OPTS += $(if $(BR2_PACKAGE_OPENSSL),-openssl,-no-openssl)
+@@ -143,7 +158,7 @@ QT5BASE_INSTALL_LIBS_$(BR2_PACKAGE_QT5BASE_CONCURRENT) += Qt5Concurrent
+ QT5BASE_INSTALL_LIBS_$(BR2_PACKAGE_QT5BASE_SQL)        += Qt5Sql
+ QT5BASE_INSTALL_LIBS_$(BR2_PACKAGE_QT5BASE_TEST)       += Qt5Test
+ QT5BASE_INSTALL_LIBS_$(BR2_PACKAGE_QT5BASE_XML)        += Qt5Xml
+-QT5BASE_INSTALL_LIBS_$(BR2_PACKAGE_QT5BASE_EGLFS)      += Qt5OpenGL
++QT5BASE_INSTALL_LIBS_$(BR2_PACKAGE_QT5BASE_OPENGL)     += Qt5OpenGL
+ 
+ QT5BASE_INSTALL_LIBS_$(BR2_PACKAGE_QT5BASE_GUI)          += Qt5Gui
+ QT5BASE_INSTALL_LIBS_$(BR2_PACKAGE_QT5BASE_WIDGETS)      += Qt5Widgets
+-- 
+1.8.3.2
+
