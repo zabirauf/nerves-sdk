@@ -1,0 +1,40 @@
+From 64b4d4138229572006ad18c6d0db728ad8b26d98 Mon Sep 17 00:00:00 2001
+From: Frank Hunleth <fhunleth@troodon-software.com>
+Date: Tue, 22 Apr 2014 21:48:27 -0400
+Subject: [PATCH 7/7] qt5base: if xrender is available, depend on it
+
+While Qt doesn't require xrender, if it's available, it will try and use
+it. This makes sure that xrender gets built before Qt if it's going to
+get built.
+---
+ package/qt5/qt5base/qt5base.mk | 7 ++++---
+ 1 file changed, 4 insertions(+), 3 deletions(-)
+
+diff --git a/package/qt5/qt5base/qt5base.mk b/package/qt5/qt5base/qt5base.mk
+index b7f6e4d..e696a1a 100644
+--- a/package/qt5/qt5base/qt5base.mk
++++ b/package/qt5/qt5base/qt5base.mk
+@@ -89,6 +89,10 @@ QT5BASE_DEPENDENCIES   += \
+ 	xcb-util-keysyms \
+ 	xlib_libX11 \
+ 	libxkbcommon
++ifeq ($(BR2_PACKAGE_XLIB_LIBXRENDER),y)
++QT5BASE_DEPENDENCIES   += xlib_libXrender
++QT5BASE_CONFIGURE_OPTS += -xrender
++endif
+ ifeq ($(BR2_PACKAGE_QT5BASE_WIDGETS),y)
+ QT5BASE_DEPENDENCIES   += xlib_libXext
+ endif
+@@ -103,9 +107,6 @@ QT5BASE_DEPENDENCIES   += libgles
+ else
+ QT5BASE_CONFIGURE_OPTS += -opengl desktop
+ QT5BASE_DEPENDENCIES   += libgl
+-ifeq ($(BR2_PACKAGE_QT5BASE_XCB),y)
+-QT5BASE_CONFIGURE_OPTS += -xrender
+-endif
+ endif
+ else
+ QT5BASE_CONFIGURE_OPTS += -no-opengl
+-- 
+1.8.3.2
+

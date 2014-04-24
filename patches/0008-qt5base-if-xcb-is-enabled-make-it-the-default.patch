@@ -1,0 +1,30 @@
+From e5ac4a422cd1bd7e26428ac2979d7e94fee4f74b Mon Sep 17 00:00:00 2001
+From: Frank Hunleth <fhunleth@troodon-software.com>
+Date: Wed, 23 Apr 2014 11:02:54 -0400
+Subject: [PATCH 8/8] qt5base: if xcb is enabled, make it the default
+
+If this is not done, Qt will try to use eglfs by default. This can be
+overridden by specifying -platform xcb to Qt applications, but this is
+inconvenient.
+
+Signed-off-by: Frank Hunleth <fhunleth@troodon-software.com>
+---
+ package/qt5/qt5base/qt5base.mk | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/package/qt5/qt5base/qt5base.mk b/package/qt5/qt5base/qt5base.mk
+index e696a1a..3b60a13 100644
+--- a/package/qt5/qt5base/qt5base.mk
++++ b/package/qt5/qt5base/qt5base.mk
+@@ -81,7 +81,7 @@ QT5BASE_CONFIGURE_OPTS += $(if $(BR2_PACKAGE_QT5BASE_DIRECTFB),-directfb,-no-dir
+ QT5BASE_DEPENDENCIES   += $(if $(BR2_PACKAGE_QT5BASE_DIRECTFB),directfb)
+ 
+ ifeq ($(BR2_PACKAGE_QT5BASE_XCB),y)
+-QT5BASE_CONFIGURE_OPTS += -xcb -system-xkbcommon
++QT5BASE_CONFIGURE_OPTS += -xcb -system-xkbcommon -qpa xcb
+ QT5BASE_DEPENDENCIES   += \
+ 	libxcb \
+ 	xcb-util-wm \
+-- 
+1.8.3.2
+

@@ -1,0 +1,43 @@
+From 350f950fed2ea1196cece85184c163dff67a7de2 Mon Sep 17 00:00:00 2001
+From: Frank Hunleth <fhunleth@troodon-software.com>
+Date: Thu, 24 Apr 2014 10:37:34 -0400
+Subject: [PATCH 10/10] xdriver_xf86-video-intel: add libXcomposite dependency
+
+This fixes a compiler error where the compositeext.h header file
+couldn't be found. This file is installed by xserver_xorg-server when
+the composite extension is enabled, so select it in the Config.in and
+mark it as a dependency.
+
+Signed-off-by: Frank Hunleth <fhunleth@troodon-software.com>
+---
+ package/x11r7/xdriver_xf86-video-intel/Config.in                   | 1 +
+ package/x11r7/xdriver_xf86-video-intel/xdriver_xf86-video-intel.mk | 2 +-
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/package/x11r7/xdriver_xf86-video-intel/Config.in b/package/x11r7/xdriver_xf86-video-intel/Config.in
+index 69a9e78..7b98c35 100644
+--- a/package/x11r7/xdriver_xf86-video-intel/Config.in
++++ b/package/x11r7/xdriver_xf86-video-intel/Config.in
+@@ -7,6 +7,7 @@ config BR2_PACKAGE_XDRIVER_XF86_VIDEO_INTEL
+ 	select BR2_PACKAGE_XPROTO_RENDERPROTO
+ 	select BR2_PACKAGE_XPROTO_XPROTO
+ 	select BR2_PACKAGE_XLIB_LIBPCIACCESS
++	select BR2_PACKAGE_XLIB_LIBXCOMPOSITE
+ 	select BR2_PACKAGE_LIBDRM
+ 	select BR2_PACKAGE_LIBDRM_INTEL
+ 	help
+diff --git a/package/x11r7/xdriver_xf86-video-intel/xdriver_xf86-video-intel.mk b/package/x11r7/xdriver_xf86-video-intel/xdriver_xf86-video-intel.mk
+index f7fbcdf..9dce246 100644
+--- a/package/x11r7/xdriver_xf86-video-intel/xdriver_xf86-video-intel.mk
++++ b/package/x11r7/xdriver_xf86-video-intel/xdriver_xf86-video-intel.mk
+@@ -23,6 +23,6 @@ XDRIVER_XF86_VIDEO_INTEL_CONF_OPT = \
+ 	--disable-dga \
+ 	--disable-async-swap
+ 
+-XDRIVER_XF86_VIDEO_INTEL_DEPENDENCIES = xserver_xorg-server xproto_fontsproto xproto_randrproto xproto_renderproto xproto_xproto libdrm xlib_libpciaccess
++XDRIVER_XF86_VIDEO_INTEL_DEPENDENCIES = xserver_xorg-server xproto_fontsproto xproto_randrproto xproto_renderproto xproto_xproto libdrm xlib_libpciaccess xlib_libXcomposite
+ 
+ $(eval $(autotools-package))
+-- 
+1.8.3.2
+
