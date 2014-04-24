@@ -1,0 +1,64 @@
+From c8361e923c330ac263614a5364dde9e8360c7600 Mon Sep 17 00:00:00 2001
+From: Frank Hunleth <fhunleth@troodon-software.com>
+Date: Thu, 24 Apr 2014 18:01:01 -0400
+Subject: [PATCH 11/11] xdriver_xf86-video-modesetting: new package
+
+Signed-off-by: Frank Hunleth <fhunleth@troodon-software.com>
+---
+ package/x11r7/Config.in                                    |  1 +
+ package/x11r7/xdriver_xf86-video-modesetting/Config.in     |  9 +++++++++
+ .../xdriver_xf86-video-modesetting.mk                      | 14 ++++++++++++++
+ 3 files changed, 24 insertions(+)
+ create mode 100644 package/x11r7/xdriver_xf86-video-modesetting/Config.in
+ create mode 100644 package/x11r7/xdriver_xf86-video-modesetting/xdriver_xf86-video-modesetting.mk
+
+diff --git a/package/x11r7/Config.in b/package/x11r7/Config.in
+index 8685ca1..8156719 100644
+--- a/package/x11r7/Config.in
++++ b/package/x11r7/Config.in
+@@ -163,6 +163,7 @@ if BR2_PACKAGE_XORG7
+ 		source package/x11r7/xdriver_xf86-video-intel/Config.in
+ 		source package/x11r7/xdriver_xf86-video-mach64/Config.in
+ 		source package/x11r7/xdriver_xf86-video-mga/Config.in
++		source package/x11r7/xdriver_xf86-video-modesetting/Config.in
+ 		source package/x11r7/xdriver_xf86-video-neomagic/Config.in
+ 		source package/x11r7/xdriver_xf86-video-nv/Config.in
+ 		source package/x11r7/xdriver_xf86-video-openchrome/Config.in
+diff --git a/package/x11r7/xdriver_xf86-video-modesetting/Config.in b/package/x11r7/xdriver_xf86-video-modesetting/Config.in
+new file mode 100644
+index 0000000..02d3ab6
+--- /dev/null
++++ b/package/x11r7/xdriver_xf86-video-modesetting/Config.in
+@@ -0,0 +1,9 @@
++config BR2_PACKAGE_XDRIVER_XF86_VIDEO_MODESETTING
++	bool "xf86-video-modesetting"
++	select BR2_PACKAGE_XPROTO_FONTSPROTO
++	select BR2_PACKAGE_XPROTO_RANDRPROTO
++	select BR2_PACKAGE_XPROTO_RENDERPROTO
++	select BR2_PACKAGE_XPROTO_VIDEOPROTO
++	select BR2_PACKAGE_XPROTO_XPROTO
++	help
++	  This is a generic modesetting driver.
+diff --git a/package/x11r7/xdriver_xf86-video-modesetting/xdriver_xf86-video-modesetting.mk b/package/x11r7/xdriver_xf86-video-modesetting/xdriver_xf86-video-modesetting.mk
+new file mode 100644
+index 0000000..4d262ff
+--- /dev/null
++++ b/package/x11r7/xdriver_xf86-video-modesetting/xdriver_xf86-video-modesetting.mk
+@@ -0,0 +1,14 @@
++################################################################################
++#
++# xdriver_xf86-video-modesetting
++#
++################################################################################
++
++XDRIVER_XF86_VIDEO_MODESETTING_VERSION = 0.8.1
++XDRIVER_XF86_VIDEO_MODESETTING_SOURCE = xf86-video-modesetting-$(XDRIVER_XF86_VIDEO_MODESETTING_VERSION).tar.bz2
++XDRIVER_XF86_VIDEO_MODESETTING_SITE = http://xorg.freedesktop.org/releases/individual/driver
++XDRIVER_XF86_VIDEO_MODESETTING_LICENSE = MIT
++XDRIVER_XF86_VIDEO_MODESETTING_LICENSE_FILES = COPYING
++XDRIVER_XF86_VIDEO_MODESETTING_DEPENDENCIES = xserver_xorg-server xproto_fontsproto xproto_randrproto xproto_renderproto xproto_videoproto xproto_xproto
++
++$(eval $(autotools-package))
+-- 
+1.8.3.2
+
