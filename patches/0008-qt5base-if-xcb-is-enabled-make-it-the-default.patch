@@ -1,7 +1,7 @@
-From e5ac4a422cd1bd7e26428ac2979d7e94fee4f74b Mon Sep 17 00:00:00 2001
+From aa9be41569abd026d4cda4376a4702ca40637dcb Mon Sep 17 00:00:00 2001
 From: Frank Hunleth <fhunleth@troodon-software.com>
 Date: Wed, 23 Apr 2014 11:02:54 -0400
-Subject: [PATCH 8/8] qt5base: if xcb is enabled, make it the default
+Subject: [PATCH 08/20] qt5base: if xcb is enabled, make it the default
 
 If this is not done, Qt will try to use eglfs by default. This can be
 overridden by specifying -platform xcb to Qt applications, but this is

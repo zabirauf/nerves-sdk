@@ -1,7 +1,7 @@
-From 1666492c839e2d216544bb2500ceba0cebb918c1 Mon Sep 17 00:00:00 2001
+From 61905aef8d85d82d24b7b00b586a7a68870691a0 Mon Sep 17 00:00:00 2001
 From: Frank Hunleth <fhunleth@troodon-software.com>
 Date: Wed, 12 Feb 2014 23:20:28 -0500
-Subject: [PATCH 3/5] erlang: clean up target installation
+Subject: [PATCH 03/20] erlang: clean up target installation
 
 This patch removes source code, documentation, examples, static
 libraries, and other unnecessary files from being installed on

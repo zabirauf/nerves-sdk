@@ -1,7 +1,7 @@
-From 64b4d4138229572006ad18c6d0db728ad8b26d98 Mon Sep 17 00:00:00 2001
+From cea15d11957e859d2bc9e4c53faaee32945efb92 Mon Sep 17 00:00:00 2001
 From: Frank Hunleth <fhunleth@troodon-software.com>
 Date: Tue, 22 Apr 2014 21:48:27 -0400
-Subject: [PATCH 7/7] qt5base: if xrender is available, depend on it
+Subject: [PATCH 07/20] qt5base: if xrender is available, depend on it
 
 While Qt doesn't require xrender, if it's available, it will try and use
 it. This makes sure that xrender gets built before Qt if it's going to

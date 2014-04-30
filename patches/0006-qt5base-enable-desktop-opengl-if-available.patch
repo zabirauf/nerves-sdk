@@ -1,7 +1,7 @@
-From b809dcd95519c2f84547a1ea78342bc026993320 Mon Sep 17 00:00:00 2001
+From f41719267312b9074b31c8a060047ed9fe7b186a Mon Sep 17 00:00:00 2001
 From: Frank Hunleth <fhunleth@troodon-software.com>
 Date: Tue, 22 Apr 2014 16:14:39 -0400
-Subject: [PATCH 6/6] qt5base: enable desktop opengl if available
+Subject: [PATCH 06/20] qt5base: enable desktop opengl if available
 
 This adds support for OpenGL in Qt for configurations that include
 OpenGL, but not EGL.

@@ -1,0 +1,44 @@
+From 6ee90e9e1a6464c8cf8fadae6bf1f03350a69764 Mon Sep 17 00:00:00 2001
+From: "Yann E. MORIN" <yann.morin.1998@free.fr>
+Date: Tue, 29 Apr 2014 18:49:12 +0200
+Subject: [PATCH 15/20] boot/syslinux: rewrite options prompts
+
+Rewrite the options prompt in preparation to adding a new
+type of image to install.
+
+Add help entries to each option, too.
+
+Signed-off-by: "Yann E. MORIN" <yann.morin.1998@free.fr>
+Cc: Frank Hunleth <fhunleth@troodon-software.com>
+---
+ boot/syslinux/Config.in | 12 +++++++++---
+ 1 file changed, 9 insertions(+), 3 deletions(-)
+
+diff --git a/boot/syslinux/Config.in b/boot/syslinux/Config.in
+index f7525b8..7263128 100644
+--- a/boot/syslinux/Config.in
++++ b/boot/syslinux/Config.in
+@@ -14,11 +14,17 @@ choice
+ 	bool "Image to install"
+ 
+ config BR2_TARGET_SYSLINUX_ISOLINUX
+-	bool "Install isolinux"
++	bool "isolinux"
++	help
++	  Install the legacy-BIOS 'isolinux' image, to boot off
++	  optical media (CDROM, DVD.)
+ 
+ config BR2_TARGET_SYSLINUX_PXELINUX
+-	bool "Install pxelinux"
++	bool "pxelinux"
++	help
++	  Install the legacy-BIOS 'pxelinux' image, to boot off
++	  the network using PXE.
+ 
+ endchoice
+ 
+-endif
++endif # BR2_TARGET_SYSLINUX
+-- 
+1.8.3.2
+

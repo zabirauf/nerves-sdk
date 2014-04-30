@@ -1,7 +1,7 @@
-From c8361e923c330ac263614a5364dde9e8360c7600 Mon Sep 17 00:00:00 2001
+From 6646b49a07b6b0ced823936f7ca22f70370e7e30 Mon Sep 17 00:00:00 2001
 From: Frank Hunleth <fhunleth@troodon-software.com>
 Date: Thu, 24 Apr 2014 18:01:01 -0400
-Subject: [PATCH 11/11] xdriver_xf86-video-modesetting: new package
+Subject: [PATCH 11/20] xdriver_xf86-video-modesetting: new package
 
 Signed-off-by: Frank Hunleth <fhunleth@troodon-software.com>
 ---

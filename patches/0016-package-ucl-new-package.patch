@@ -1,0 +1,41 @@
+From fb71194c502cea9c5a3d4f0dfc779f5e98b85d23 Mon Sep 17 00:00:00 2001
+From: Frank Hunleth <fhunleth@troodon-software.com>
+Date: Tue, 29 Apr 2014 18:49:13 +0200
+Subject: [PATCH 16/20] package/ucl: new package
+
+UCL implements a number of compression algorithms that achieve an
+excellent compression ratio while allowing *very* fast decompression.
+Decompression requires no additional memory.
+
+This is needed for UPX, which is needed for syslinux 6.x.
+
+Signed-off-by: Frank Hunleth <fhunleth@troodon-software.com>
+[yann.morin.1998@free.fr: don't add a menuconfig entry, since it
+ currently is for internal use only]
+Signed-off-by: "Yann E. MORIN" <yann.morin.1998@free.fr>
+---
+ package/ucl/ucl.mk | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+ create mode 100644 package/ucl/ucl.mk
+
+diff --git a/package/ucl/ucl.mk b/package/ucl/ucl.mk
+new file mode 100644
+index 0000000..225ad7c
+--- /dev/null
++++ b/package/ucl/ucl.mk
+@@ -0,0 +1,12 @@
++################################################################################
++#
++# ucl
++#
++################################################################################
++
++UCL_VERSION = 1.03
++UCL_SITE = http://www.oberhumer.com/opensource/ucl/download/
++UCL_LICENSE = GPLv2+
++UCL_LICENSE_FILES = COPYING
++
++$(eval $(host-autotools-package))
+-- 
+1.8.3.2
+

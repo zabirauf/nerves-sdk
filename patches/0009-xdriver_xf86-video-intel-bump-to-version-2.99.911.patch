@@ -1,7 +1,7 @@
-From 94649a0a2917097264c312ae0735e49f1508bb5f Mon Sep 17 00:00:00 2001
+From 7c6e03dcd537b09db5d4e3053d0881cc0b5192f3 Mon Sep 17 00:00:00 2001
 From: Frank Hunleth <fhunleth@troodon-software.com>
 Date: Wed, 23 Apr 2014 15:48:03 -0400
-Subject: [PATCH 9/9] xdriver_xf86-video-intel: bump to version 2.99.911
+Subject: [PATCH 09/20] xdriver_xf86-video-intel: bump to version 2.99.911
 
 Signed-off-by: Frank Hunleth <fhunleth@troodon-software.com>
 ---
